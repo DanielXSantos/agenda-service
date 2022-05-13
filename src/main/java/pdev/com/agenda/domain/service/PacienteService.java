@@ -2,39 +2,43 @@ package pdev.com.agenda.domain.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pdev.com.agenda.api.mapper.PacienteMapper;
+import pdev.com.agenda.api.request.PacienteRequest;
+import pdev.com.agenda.api.response.PacienteResponse;
 import pdev.com.agenda.domain.entity.Paciente;
 import pdev.com.agenda.domain.exception.BusinessException;
 import pdev.com.agenda.domain.repository.PacienteRepository;
 
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class PacienteService {
 
-    @Autowired
-    private PacienteRepository repository;
+    private final PacienteRepository repository;
+    private final PacienteMapper mapper;
 
-    public Paciente salvar(Paciente paciente) {
-        Optional<Paciente> pacienteByCpf = findByCpf(paciente);
-        if(pacienteByCpf.isPresent() && !pacienteByCpf.get().getId().equals(paciente.getId())) {
+    public PacienteResponse salvar(PacienteRequest pacienteRequest) {
+        Optional<Paciente> pacienteByCpf = findByCpf(pacienteRequest.getCpf());
+        if(pacienteByCpf.isPresent() && !pacienteByCpf.get().getId().equals(pacienteRequest.getId())) {
             throw new BusinessException("Cpf ja cadastrado!");
         }
 
-        return repository.save(paciente);
+        return mapper.toResponse(repository.save(mapper.toEntity(pacienteRequest)));
     }
 
-    private Optional<Paciente> findByCpf(Paciente paciente) {
-        return repository.findByCpf(paciente.getCpf());
+    private Optional<Paciente> findByCpf(String cpf) {
+        return repository.findByCpf(cpf);
     }
 
-    public List<Paciente> listarTodos() {
-        return repository.findAll();
+    public List<PacienteResponse> listarTodos() {
+        return mapper.toListResponse(repository.findAll());
     }
 
-    public Optional<Paciente> buscarPorId(Long id) {
-        return repository.findById(id);
+    public PacienteResponse buscarPorId(Long id) {
+        return mapper.toResponse(repository.getById(id));
     }
 
     public void deletar(Long id) {

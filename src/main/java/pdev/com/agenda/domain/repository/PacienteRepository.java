@@ -1,6 +1,7 @@
 package pdev.com.agenda.domain.repository;
 
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pdev.com.agenda.domain.entity.Paciente;
