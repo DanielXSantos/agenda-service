@@ -1,7 +1,6 @@
 package pdev.com.agenda.api.mapper;
 
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import pdev.com.agenda.api.request.PacienteRequest;
 import pdev.com.agenda.api.response.PacienteResponse;
