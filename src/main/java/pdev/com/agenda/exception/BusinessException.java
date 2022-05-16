@@ -1,4 +1,4 @@
-package pdev.com.agenda.domain.exception;
+package pdev.com.agenda.exception;
 
 public class BusinessException extends RuntimeException {
 

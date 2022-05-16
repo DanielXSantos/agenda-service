@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pdev.com.agenda.domain.entity.Paciente;
-import pdev.com.agenda.domain.exception.BusinessException;
+import pdev.com.agenda.exception.BusinessException;
 import pdev.com.agenda.domain.repository.PacienteRepository;
 
 @RequiredArgsConstructor
