@@ -1,6 +1,5 @@
 package pdev.com.agenda.domain.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,15 +16,20 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Agenda {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String descricao;
+
     @Column(name = "data_hora")
-    private LocalDate horario;
-    @Column
+    private LocalDateTime horario;
+
+    @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
+
     @ManyToOne
     private Paciente paciente;
 }

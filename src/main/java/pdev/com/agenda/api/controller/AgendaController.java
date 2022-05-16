@@ -2,6 +2,7 @@ package pdev.com.agenda.api.controller;
 
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class AgendaController {
     private final AgendaMapper mapper;
 
     @PostMapping
-    public ResponseEntity<AgendaResponse> salvar(@RequestBody AgendaRequest request) {
+    public ResponseEntity<AgendaResponse> salvar(@Valid @RequestBody AgendaRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(service.salvar(
                 mapper.toEntity(request))));
 

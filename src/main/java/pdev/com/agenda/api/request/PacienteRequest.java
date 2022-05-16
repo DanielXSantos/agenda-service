@@ -13,8 +13,6 @@ import lombok.Setter;
 @Setter
 public class PacienteRequest {
 
-    private Long id;
-
     @NotBlank(message = "Nome do paciente é obrigatorio!")
     private String nome;
 
